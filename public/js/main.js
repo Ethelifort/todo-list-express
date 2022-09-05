@@ -14,10 +14,10 @@ Array.from(item).forEach((element)=>{ /*Creating an array from our selection and
 
 Array.from(itemCompleted).forEach((element)=>{ /*Creating an array from our selection and starting a loop.*/
     element.addEventListener('click', markUnComplete) /*Adds an event listener only to completed items.*/
-}) //Close loop.
+}) /*Close our loop*/
 
 async function deleteItem(){ //Declare asynchronous function.
-    const itemText = this.parentNode.childNodes[1].innerText /*Looks inside of the list item and only grabs the inner text within the list span.*/
+    const itemText = this.parentNode.childNodes[5].innerText /*Looks inside of the list item and only grabs the inner text within the list span.*/
     try{ // Starting a try block.
         const response = await fetch('deleteItem', {//Createes a response variable that waits on a fetch to get adata from the result of deleteItem route.
             method: 'delete', //Sets the CRUD method for the route.
@@ -36,7 +36,7 @@ async function deleteItem(){ //Declare asynchronous function.
 } //end function
 
 async function markComplete(){// Declare asynchronous function.
-    const itemText = this.parentNode.childNodes[1].innerText //Looks inside of the list item and grabs only the inner text within the list span.
+    const itemText = this.parentNode.childNodes[5].innerText //Looks inside of the list item and grabs only the inner text within the list span.
     try{ //Starting a try block.
         const response = await fetch('markComplete', { //Creates a response variable that waits on fetch to get data from the result of the markComplete route.
             method: 'put', //Setting up the CRUD method to "update" for the route.
@@ -55,7 +55,7 @@ async function markComplete(){// Declare asynchronous function.
 }
 
 async function markUnComplete(){// Declare asynchronous function.
-    const itemText = this.parentNode.childNodes[1].innerText //Looks inside of the list item and grabs only the inner text within the list span.
+    const itemText = this.parentNode.childNodes[5].innerText //Looks inside of the list item and grabs only the inner text within the list span.
     try{//Starting a try block.
         const response = await fetch('markUnComplete', { //Creates a response variable that waits on fetch to get data from the result of the markUncomplete route.
             method: 'put', //Setting up the CRUD method to "update" for the route.

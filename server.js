@@ -1,7 +1,7 @@
 const express = require('express') //Making it possible to use express in this file.
 const app = express() // setting a variable and assigning it to the instance of express.
 const MongoClient = require('mongodb').MongoClient //Makes it possible to use methods associated with MongoClient and talk to our DB.
-const PORT = 5000 // setting a constant to the port number where server will be listening.
+const PORT = 2121 // setting a constant to the port number where server will be listening.
 require('dotenv').config(); // Allows us to look for variables inside of the .env file.
 
 
@@ -15,7 +15,7 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })//Creating a c
     .then(client => { //Waiting on connection and proceeding if sucuessful, and passing in all the client information.
         console.log(`Connected to ${dbName} Database`) //Log to the console template literal "connected to todo Database".
         db = client.db(dbName) //Assigning a value to previusly declared db variable that contains a db client factory method.
-    })//Closing our .then
+    }) //Closing our .then
    
     
 
@@ -54,7 +54,7 @@ app.post('/addTodo', (request, response) => { //Starts a POST mehtod when the ad
 app.put('/markComplete', (request, response) => { //Start a PUT method when the markComplete route is passed in.
     db.collection('todos').updateOne({thing: request.body.itemFromJS},{//Look in the db for one item matching the name of the item passed in from main.js that was clicked on.
         $set: {
-            completed: true// set completed status to true.
+            completed: true // set completed status to true.
           }
     },{
         sort: {_id: -1}, // moves item to the bottom of the list.
@@ -86,7 +86,7 @@ app.put('/markUnComplete', (request, response) => { //Start a PUT method when th
 }) //End put
 
 app.delete('/deleteItem', (request, response) => { //Start a DELETE method when the markUnComplete route is passed in.
-    db.collection('todos').deleteOne({thing: request.body.itemFromJS}) //Look inside todods collection for the ONE item that has a matching name from our JS file.
+    db.collection('todos').deleteOne({thing: request.body.itemFromJS}) //Look inside todos collection for the ONE item that has a matching name from our JS file.
     .then(result => { //Start a then if delete was successful.
         console.log('Todo Deleted') //Logging successful completion.
         response.json('Todo Deleted') //Sending a response back to the sender.
